@@ -14,10 +14,11 @@
   Built by Khoi Hoang https://github.com/khoih-prog/ESPAsync_WiFiManager
   Licensed under MIT license
 
-  Version: 1.15.1
+  Version: 1.16.0
 
   Version Modified By  Date      Comments
   ------- -----------  ---------- -----------
+  1.16.0  A Lopez      21/07/2023 Allow for config without auto reconnection
   1.0.11  K Hoang      21/08/2020 Initial coding to use (ESP)AsyncWebServer instead of (ESP8266)WebServer. Bump up to v1.0.11
                                   to sync with ESP_WiFiManager v1.0.11
   ...
@@ -579,7 +580,7 @@ class ESPAsync_WiFiManager
 
     // If you want to start the config portal
     bool          startConfigPortal();
-    bool          startConfigPortal(char const *apName, char const *apPassword = NULL);
+    bool          startConfigPortal(char const *apName, char const *apPassword = NULL, bool connectAfterSave = true);
     void startConfigPortalModeless(char const *apName, char const *apPassword, bool shouldConnectWiFi = true);
 
     // get the AP name of the config portal, so it can be used in the callback

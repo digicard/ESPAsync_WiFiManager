@@ -14,10 +14,11 @@
   Built by Khoi Hoang https://github.com/khoih-prog/ESPAsync_WiFiManager
   Licensed under MIT license
 
-  Version: 1.15.1
+  Version: 1.16.0
 
   Version Modified By  Date      Comments
   ------- -----------  ---------- -----------
+  1.16.0  A Lopez      21/07/2023 Allow for config without auto reconnection
   1.0.11  K Hoang      21/08/2020 Initial coding to use (ESP)AsyncWebServer instead of (ESP8266)WebServer. Bump up to v1.0.11
                                   to sync with ESP_WiFiManager v1.0.11
   ...
@@ -820,7 +821,7 @@ bool ESPAsync_WiFiManager::startConfigPortal()
 
 //////////////////////////////////////////
 
-bool ESPAsync_WiFiManager::startConfigPortal(char const *apName, char const *apPassword)
+bool ESPAsync_WiFiManager::startConfigPortal(char const *apName, char const *apPassword /* = NULL */, bool connectAfterSave /* = true*/)
 {
   WiFi.mode(WIFI_AP_STA);
 
@@ -890,38 +891,53 @@ bool ESPAsync_WiFiManager::startConfigPortal(char const *apName, char const *apP
       TimedOut = false;
       delay(2000);
 
-      LOGERROR(F("Connecting to new AP"));
+      if (!connectAfterSave) {
+        LOGINFO("Aborting connection after config saved. Reconnect manually.");
+        
+        WiFi.mode(WIFI_OFF);
 
-      // using user-provided  _ssid, _pass in place of system-stored ssid and pass
-      if (connectWifi(_ssid, _pass) != WL_CONNECTED)
-      {
-        LOGERROR(F("Failed to connect"));
-
-        WiFi.mode(WIFI_AP); // Dual mode becomes flaky if not connected to a WiFi network.
-      }
-      else
-      {
-        //notify that configuration has changed and any optional parameters should be saved
         if (_savecallback != NULL)
         {
           //todo: check if any custom parameters actually exist, and check if they really changed maybe
           _savecallback();
         }
-
         break;
       }
-
-      if (_shouldBreakAfterConfig)
+      else 
       {
-        //flag set to exit after config after trying to connect
-        //notify that configuration has changed and any optional parameters should be saved
-        if (_savecallback != NULL)
+        LOGERROR(F("Connecting to new AP"));
+
+        // using user-provided  _ssid, _pass in place of system-stored ssid and pass
+        if (connectWifi(_ssid, _pass) != WL_CONNECTED)
         {
-          //todo: check if any custom parameters actually exist, and check if they really changed maybe
-          _savecallback();
+          LOGERROR(F("Failed to connect"));
+
+          WiFi.mode(WIFI_AP); // Dual mode becomes flaky if not connected to a WiFi network.
+        }
+        else
+        {
+          //notify that configuration has changed and any optional parameters should be saved
+          if (_savecallback != NULL)
+          {
+            //todo: check if any custom parameters actually exist, and check if they really changed maybe
+            _savecallback();
+          }
+
+          break;
         }
 
-        break;
+        if (_shouldBreakAfterConfig)
+        {
+          //flag set to exit after config after trying to connect
+          //notify that configuration has changed and any optional parameters should be saved
+          if (_savecallback != NULL)
+          {
+            //todo: check if any custom parameters actually exist, and check if they really changed maybe
+            _savecallback();
+          }
+
+          break;
+        }
       }
     }
 
@@ -944,7 +960,8 @@ bool ESPAsync_WiFiManager::startConfigPortal(char const *apName, char const *apP
 #endif
   }
 
-  WiFi.mode(WIFI_STA);
+  if (connectAfterSave) 
+    WiFi.mode(WIFI_STA);
 
   if (TimedOut)
   {
