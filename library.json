@@ -1,20 +1,25 @@
 {
   "name": "ESPAsync_WiFiManager",
-  "version": "1.15.1",
+  "version": "1.16.1",
   "keywords": "wifi, WiFiManager, esp8266, esp32, esp32-s2, esp32-s3, esp32-c3, AsyncWebServer, Async-WiFiManager, MultiWiFi, Async, Communication, Credentials, Config-Portal, DoubleReset, MultiReset, littlefs, spiffs, dns-server, iot, eeprom",
   "description": "ESP32 (including ESP32-S2, ESP32-S3 and ESP32-C3), ESP8266 WiFi Connection Manager using AsyncWebServer, with enhanced GUI and fallback Web ConfigPortal. This Library is used for configuring ESP32 (including ESP32-S2, ESP32-S3 and ESP32-C3), ESP8266 modules WiFi Credentials at runtime. You can also specify static DNS servers, personalized HostName, fixed or random AP channel. Now with MultiWiFi auto(Re)connect, configurable CORS Header and auto-Timezone features. Auto detect ESP32 core and use either built-in LittleFS or external LITTLEFS library. Using AsyncDNSServer instead of DNSServer. Now using correct ESP32 chipIP and optionally display Credentials on Config Portal",
-  "authors":
-  {
-    "name":  "Khoi Hoang",
-    "url":   "https://github.com/khoih-prog",
-    "maintainer": true
-  },
+  "authors": [  {
+      "name":  "Khoi Hoang",
+      "url":   "https://github.com/khoih-prog",
+      "maintainer": false
+    },
+    {
+      "name":  "Alberto Lopez Siemens",
+      "url":   "https://github.com/AlbertoLopSie",
+      "maintainer": true
+    }
+  ],
   "repository":
   {
     "type": "git",
-    "url": "https://github.com/khoih-prog/ESPAsync_WiFiManager"
+    "url": "https://github.com/digicard/ESPAsync_WiFiManager"
   },
-  "homepage": "https://github.com/khoih-prog/ESPAsync_WiFiManager",
+  "homepage": "https://github.com/digicard/ESPAsync_WiFiManager",
   "export": {
     "exclude": [
       "linux",
@@ -24,9 +29,10 @@
   },
   "dependencies": [
     {
+      "owner": "ESP32Async",
       "name": "AsyncTCP",
-      "version": "https://github.com/me-no-dev/AsyncTCP",
-      "platforms": [ "espressif32"]
+      "version": "^3.3.5",
+      "platforms": "espressif32"
     },
     {
       "name": "ESPAsyncTCP",
@@ -35,7 +41,7 @@
     },
     {
       "name": "ESP Async WebServer",
-      "version": "https://github.com/khoih-prog/ESPAsyncWebServer",
+      "version": "https://github.com/ESP32Async/ESPAsyncWebServer#v3.7.0",
       "platforms": ["espressif8266", "espressif32"]
     },
     {
@@ -46,8 +52,8 @@
     },
     {
       "name": "ESPAsyncDNSServer",
-      "version": "https://github.com/khoih-prog/ESPAsyncDNSServer",
-      "platforms": ["espressif8266", "espressif32"]
+      "version": "https://github.com/devyte/ESPAsyncDNSServer",
+      "platforms": ["espressif"]
     },
     {
       "owner": "khoih-prog",

@@ -18,6 +18,7 @@
 
   Version Modified By  Date      Comments
   ------- -----------  ---------- -----------
+  1.16.1  A Lopez      26/07/2025 Change WiFi.getAutoConnect/WiFi.setAutoConnect for getAutoReconnect/setAutoReconnect
   1.16.0  A Lopez      21/07/2023 Allow for config without auto reconnection
   1.0.11  K Hoang      21/08/2020 Initial coding to use (ESP)AsyncWebServer instead of (ESP8266)WebServer. Bump up to v1.0.11
                                   to sync with ESP_WiFiManager v1.0.11
@@ -353,8 +354,8 @@ void ESPAsync_WiFiManager::setupConfigPortal()
   /*This library assumes autoconnect is set to 1. It usually is
     but just in case check the setting and turn on autoconnect if it is off.
     Some useful discussion at https://github.com/esp8266/Arduino/issues/1615*/
-  if (WiFi.getAutoConnect() == 0)
-    WiFi.setAutoConnect(1);
+  if (WiFi.getAutoReconnect() == 0)
+    WiFi.setAutoReconnect(1);
 
 #if !( USING_ESP32_S2 || USING_ESP32_C3 )
 #ifdef ESP8266
