@@ -18,6 +18,7 @@
 
   Version Modified By  Date      Comments
   ------- -----------  ---------- -----------
+  1.17.0  A Lopez      03/08/2025 Varios cambios funcionales y cosmeticos. Traducción al español
   1.16.1  A Lopez      26/07/2025 Change WiFi.getAutoConnect/WiFi.setAutoConnect for getAutoReconnect/setAutoReconnect
   1.16.0  A Lopez      21/07/2023 Allow for config without auto reconnection
   1.0.11  K Hoang      21/08/2020 Initial coding to use (ESP)AsyncWebServer instead of (ESP8266)WebServer. Bump up to v1.0.11
