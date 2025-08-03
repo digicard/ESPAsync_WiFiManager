@@ -31,17 +31,18 @@
     {
       "owner": "ESP32Async",
       "name": "AsyncTCP",
-      "version": "^3.3.5",
-      "platforms": "espressif32"
+      "version": "^3.4.6",
+      "platforms": [ "espressif32"]
     },
     {
+      "owner": "ESP32Async",
       "name": "ESPAsyncTCP",
-      "version": "https://github.com/khoih-prog/ESPAsyncTCP",
       "platforms": [ "espressif8266"]
     },
     {
-      "name": "ESP Async WebServer",
-      "version": "https://github.com/ESP32Async/ESPAsyncWebServer#v3.7.0",
+      "owner": "ESP32Async",
+      "name": "ESPAsyncWebServer",
+      "version": "3.7.7",
       "platforms": ["espressif8266", "espressif32"]
     },
     {
@@ -52,12 +53,18 @@
     },
     {
       "name": "ESPAsyncDNSServer",
-      "version": "https://github.com/devyte/ESPAsyncDNSServer",
-      "platforms": ["espressif"]
+      "version": "https://github.com/khoih-prog/ESPAsyncDNSServer",
+      "platforms": ["espressif8266", "espressif32"]
     },
     {
       "owner": "khoih-prog",
       "name": "ESP_DoubleResetDetector",
+      "version": ">=1.3.2",
+      "platforms": ["espressif8266", "espressif32"]
+    },
+    {
+      "owner": "khoih-prog",
+      "name": "ESP_MultiResetDetector",
       "version": ">=1.3.2",
       "platforms": ["espressif8266", "espressif32"]
     }

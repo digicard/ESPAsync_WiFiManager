@@ -47,7 +47,7 @@
 #endif
 
 #if !defined(USING_AUSTRALIA)
-  #define USING_AUSTRALIA      true
+  #define USING_AUSTRALIA      false
 #endif
 
 #if !defined(USING_EUROPE)
