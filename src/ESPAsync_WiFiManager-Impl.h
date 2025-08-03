@@ -1508,6 +1508,10 @@ void ESPAsync_WiFiManager::handleWifi(AsyncWebServerRequest *request)
   page.replace("[[pwd1]]",  _pass1 );
 #endif
 
+#else
+
+  page += FPSTR(WM_HTTP_FORM_START);
+
 #endif // #if INCLUDE_WIFI_CREDENTIALS_IN_CP
 
   char parLength[2];
@@ -1686,6 +1690,12 @@ void ESPAsync_WiFiManager::handleWifiSave(AsyncWebServerRequest *request)
 {
   LOGDEBUG(F("WiFi save"));
 
+  // for(int a = 0; a < request->args(); a++) {
+  //   // LOGDEBUG3(F("Arg: "), request->argName(a), "=", request->arg(a));
+  //   printf("Arg: %s = %s\n", request->argName(a).c_str(), request->arg(a).c_str());
+  //   delay(10);
+  // }
+
   //SAVE/connect here
   _ssid = request->arg("s").c_str();
   _pass = request->arg("p").c_str();
@@ -1715,13 +1725,24 @@ void ESPAsync_WiFiManager::handleWifiSave(AsyncWebServerRequest *request)
       break;
     }
 
-    //read parameter
-    String value = request->arg(_params[i]->getID()).c_str();
+    const char *cid = _params[i]->getID();
+    if(cid != NULL) {
+      std::string id = std::string(cid);
+      if(id.find_first_of(".") != std::string::npos)
+        id = id.substr(0, id.find_first_of("."));
 
-    //store it in array
-    value.toCharArray(_params[i]->_WMParam_data._value, _params[i]->_WMParam_data._length);
+      LOGDEBUG1(F("Parameter:"), id.c_str());
 
-    LOGDEBUG2(F("Parameter and value :"), _params[i]->getID(), value);
+      //read parameter
+      String value = request->arg(id.c_str());
+
+      // printf("Parameter: %s, id: %s, value: %s\n", cid, id.c_str(), value);
+
+      //store it in array
+      value.toCharArray(_params[i]->_WMParam_data._value, 1 + _params[i]->_WMParam_data._length);
+
+      LOGDEBUG2(F("Parameter and value :"), id.c_str(), value);
+    }
   }
 
   if (request->hasArg("ip")) {
