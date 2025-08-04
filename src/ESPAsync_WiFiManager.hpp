@@ -472,7 +472,7 @@ const char WM_HTTP_FORM_END[] PROGMEM = "<button class='btn' type='submit'>Guard
 
 ////////////////////////////////////////////////////
 
-const char WM_HTTP_SAVED[] PROGMEM = "<div class='msg'><b>Credenciales Guardadas</b><br>Intenta conectar ESP a la red {x}/{x1}. Espera alrededor de 10 segundos y luego verifica <a href='/'>si está bien.</a> <p/>El AP {v} se ejecutará en el mismo canal WiFi que el AP {x}/{x1}. Es posible que debas reconectar manualmente al AP {v}.</div>";
+const char WM_HTTP_SAVED[] PROGMEM = "<div class='msg'><b>Credenciales Guardadas</b><br>Intenta conectar el equipo a la red {x}/{x1}. Espera alrededor de 10\" y luego verifica <a href='/'>si est&aacute; bien.</a> <p/>El AP {v} se ejecutar&aacute; en el mismo canal WiFi que el AP {x}/{x1}. Es posible que debas reconectar manualmente al AP {v}.</div>";
 
 ////////////////////////////////////////////////////
 
